@@ -50,12 +50,14 @@
                                 "class_name": "LightningGanModule",
                                 "object_key": "pl_model",
                                 "params": {
+                                    "save_dir": "{save_dir}",
+                                    "sample_interval": 100,
                                     "generator": {
                                         "module": "models.lightweight.generator",
                                         "class_name": "Generator",
                                         "object_key": "generator",
                                         "params": {
-                                            "image_size": 256
+                                            "image_size": 128
                                         }
                                     },
                                     "discriminator": {
@@ -63,7 +65,7 @@
                                         "class_name": "Discriminator",
                                         "object_key": "discriminator",
                                         "params": {
-                                            "image_size": 256
+                                            "image_size": 128
                                         }
                                     },
                                     "optimizer": [
@@ -86,7 +88,7 @@
                                                 }
                                             },
                                             "lr_scheduler": {
-                                                "monitor": "val_loss",
+                                                "monitor": "fid",
                                                 "scheduler": {
                                                     "module": "torch.optim.lr_scheduler",
                                                     "class_name": "ReduceLROnPlateau",
@@ -121,7 +123,7 @@
                                                 }
                                             },
                                             "lr_scheduler": {
-                                                "monitor": "val_loss",
+                                                "monitor": "fid",
                                                 "scheduler": {
                                                     "module": "torch.optim.lr_scheduler",
                                                     "class_name": "ReduceLROnPlateau",
@@ -161,7 +163,7 @@
                                             "module": "pytorch_lightning.callbacks",
                                             "class_name": "EarlyStopping",
                                             "params": {
-                                                "monitor": "val_loss",
+                                                "monitor": "fid",
                                                 "patience": 10,
                                                 "mode": "min"
                                             }
@@ -171,7 +173,7 @@
                                             "class_name": "ModelCheckpoint",
                                             "params": {
                                                 "dirpath": "{save_dir}/checkpoints",
-                                                "monitor": "val_loss",
+                                                "monitor": "fid",
                                                 "save_top_k": 1,
                                                 "verbose": true,
                                                 "save_last": true,

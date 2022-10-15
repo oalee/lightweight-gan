@@ -123,7 +123,22 @@ class CarsLightningDataModule(pl.LightningDataModule):
             self.data_dir, transform=self.transform, download=True
         )
 
+        # split the dataset in train and test set
+        self.dataset_train, self.dataset_val = torch.utils.data.random_split(
+            self.dataset,
+            [
+                int(0.9 * len(self.dataset)),
+                len(self.dataset) - int(0.9 * len(self.dataset)),
+            ],
+            generator=torch.Generator().manual_seed(42),
+        )
+
     def train_dataloader(self):
         return DataLoader(
-            self.dataset, batch_size=self.batch_size, num_workers=self.num_workers
+            self.dataset_train, batch_size=self.batch_size, num_workers=self.num_workers
+        )
+
+    def val_dataloader(self):
+        return DataLoader(
+            self.dataset_val, batch_size=self.batch_size, num_workers=self.num_workers
         )
