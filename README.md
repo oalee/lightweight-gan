@@ -12,14 +12,12 @@
 
 ## 'Lightweight' GAN
 
-[![PyPI version](https://badge.fury.io/py/lightweight-gan.svg)](https://badge.fury.io/py/lightweight-gan)
-
-Implementation of <a href="https://openreview.net/forum?id=1Fqg133qRaI">'lightweight' GAN</a> proposed in ICLR 2021, in Pytorch. The main contributions of the paper is a skip-layer excitation in the generator, paired with autoencoding self-supervised learning in the discriminator. Quoting the one-line summary "converge on single gpu with few hours' training, on 1024 resolution sub-hundred images".
+A Maté project of [lightweight GAN](https://github.com/lucidrains/lightweight-gan), an implementation of <a href="https://openreview.net/forum?id=1Fqg133qRaI">'lightweight' GAN</a> proposed in ICLR 2021, with Pytorch lightning. The main contributions of the paper is a skip-layer excitation in the generator, paired with autoencoding self-supervised learning in the discriminator. Quoting the one-line summary "converge on single gpu with few hours' training, on 1024 resolution sub-hundred images".
 
 ## Install
 
 ```bash
-$ pip install lightweight-gan
+$ pip install -r requirements.txt
 ```
 
 ## Use
@@ -27,22 +25,17 @@ $ pip install lightweight-gan
 One command
 
 ```bash
-$ lightweight_gan --data ./path/to/images --image-size 512
+$ mate train lwgan
 ```
 
 Model will be saved to `./models/{name}` every 1000 iterations, and samples from the model saved to `./results/{name}`. `name` will be `default`, by default.
 
 ## Training settings
 
-Pretty self explanatory for deep learning practitioners
+To change the training settings and hyperparameters, edit or create a `experiment.json` file in `experiments/` folder. Pretty self explanatory for deep learning practitioners
 
 ```bash
-$ lightweight_gan \
-    --data ./path/to/images \
-    --name {name of run} \
-    --batch-size 16 \
-    --gradient-accumulate-every 4 \
-    --num-train-steps 200000
+$ mate train lwgan_tiny
 ```
 
 ## Augmentation
