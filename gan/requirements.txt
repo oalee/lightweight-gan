@@ -1,0 +1,11 @@
+adabelief_pytorch==0.2.1
+aim==3.14.1
+einops==0.4.1
+gan==0.0.1
+kornia==0.6.8
+Pillow==9.2.0
+pytorch_fid==0.2.1
+pytorch_lightning==1.7.5
+torch==1.12.1+cu116
+torchvision==0.13.1+cu116
+tqdm==4.64.1
