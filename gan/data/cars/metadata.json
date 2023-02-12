@@ -3,16 +3,22 @@
     "description": "",
     "version": "",
     "author": "",
+    "authors": [],
     "license": "",
-    "url": "gan/data_loaders/cars/",
+    "url": "https//github.com/ilex-paraguariensis/lightweight-gan/tree/main/gan/data_loaders/cars/",
     "category": "",
     "backbone": "",
+    "module_path": [
+        "data_loaders",
+        "cars"
+    ],
+    "hash": "4309bf76993ec8bc7ba86df333c1967279faec0f",
     "type": "data_loaders",
     "exports": {
         "classes": [
             {
                 "class_name": "CarsLightningDataModule",
-                "module": "cars",
+                "module": "data_loaders.cars",
                 "params": {
                     "image_size": 128,
                     "aug_prob": 0.5,
@@ -75,7 +81,7 @@
                                                 "class_name": "Adam",
                                                 "object_key": "optimizer",
                                                 "params": {
-                                                    "lr": 0.0004,
+                                                    "lr": 4e-05,
                                                     "betas": [
                                                         0.5,
                                                         0.999
@@ -91,15 +97,11 @@
                                                 "monitor": "fid",
                                                 "scheduler": {
                                                     "module": "torch.optim.lr_scheduler",
-                                                    "class_name": "ReduceLROnPlateau",
+                                                    "class_name": "StepLR",
                                                     "params": {
                                                         "optimizer": "{optimizer}",
-                                                        "mode": "min",
-                                                        "factor": 0.5,
-                                                        "threshold": 1e-08,
-                                                        "threshold_mode": "rel",
-                                                        "patience": 0,
-                                                        "verbose": true
+                                                        "step_size": 10,
+                                                        "gamma": 0.1
                                                     }
                                                 }
                                             }
@@ -110,7 +112,7 @@
                                                 "class_name": "Adam",
                                                 "object_key": "optimizer_d",
                                                 "params": {
-                                                    "lr": 0.0004,
+                                                    "lr": 4e-05,
                                                     "betas": [
                                                         0.5,
                                                         0.999
@@ -131,9 +133,9 @@
                                                         "optimizer": "{optimizer_d}",
                                                         "mode": "min",
                                                         "factor": 0.5,
-                                                        "threshold": 1e-08,
+                                                        "threshold": 0.0001,
                                                         "threshold_mode": "rel",
-                                                        "patience": 0,
+                                                        "patience": 5,
                                                         "verbose": true
                                                     }
                                                 }
@@ -161,18 +163,9 @@
                                     "callbacks": [
                                         {
                                             "module": "pytorch_lightning.callbacks",
-                                            "class_name": "EarlyStopping",
-                                            "params": {
-                                                "monitor": "fid",
-                                                "patience": 10,
-                                                "mode": "min"
-                                            }
-                                        },
-                                        {
-                                            "module": "pytorch_lightning.callbacks",
                                             "class_name": "ModelCheckpoint",
                                             "params": {
-                                                "dirpath": "{save_dir}/checkpoints",
+                                                "dirpath": "{save_dir}/checkpoints/",
                                                 "monitor": "fid",
                                                 "save_top_k": 1,
                                                 "verbose": true,
@@ -212,5 +205,24 @@
             }
         ],
         "functions": []
+    },
+    "dependencies": {
+        "pip": [
+            {
+                "name": "torchvision",
+                "version": "0.13.1+cu116",
+                "lastVersion": "0.13.1"
+            },
+            {
+                "name": "torch",
+                "version": "1.12.1+cu116",
+                "lastVersion": "1.12.1"
+            },
+            {
+                "name": "pytorch_lightning",
+                "version": "1.7.5",
+                "lastVersion": "1.7.7"
+            }
+        ]
     }
 }

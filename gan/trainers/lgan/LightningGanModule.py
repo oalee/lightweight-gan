@@ -5,7 +5,6 @@ import pytorch_lightning as pl
 from torch.functional import F
 import torch
 import torchmetrics
-from gan.models.lightweight.generator import AugWrapper
 import torchvision
 
 
@@ -22,8 +21,8 @@ class LightningGanModule(pl.LightningModule):
     ):
         super().__init__()
         self.generator = generator
-        self.discriminator = discriminator
-        self.D_aug = AugWrapper(self.discriminator)
+        # self.discriminator = discriminator
+        self.D_aug = discriminator  # AugWrapper(self.discriminator)
         self.optimizer = optimizer
         self.save_dir = save_dir
         self.sample_interval = sample_interval

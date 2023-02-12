@@ -1,18 +1,23 @@
 {
-    "name": "",
-    "description": "",
+    "name": "gan",
+    "description": "gan",
     "version": "",
-    "author": "",
+    "author": "gan",
     "license": "",
-    "url": "gan/trainers/lightweight/",
+    "url": "https//github.com/ilex-paraguariensis/lightweight-gan/tree/main/gan/trainers/lightweight/",
     "category": "",
     "backbone": "",
+    "module_path": [
+        "trainers",
+        "lightweight"
+    ],
+    "hash": "15e39f2e85e9fe1f2818e0cf0cdc161fd2c9b8b5",
     "type": "trainers",
     "exports": {
         "classes": [
             {
                 "class_name": "LightningGanModule",
-                "module": "lightweight",
+                "module": "trainers.lightweight",
                 "params": {
                     "save_dir": {
                         "class": "str",
@@ -72,7 +77,7 @@
                                             "class_name": "Adam",
                                             "object_key": "optimizer",
                                             "params": {
-                                                "lr": 0.0004,
+                                                "lr": 4e-05,
                                                 "betas": [
                                                     0.5,
                                                     0.999
@@ -88,15 +93,11 @@
                                             "monitor": "fid",
                                             "scheduler": {
                                                 "module": "torch.optim.lr_scheduler",
-                                                "class_name": "ReduceLROnPlateau",
+                                                "class_name": "StepLR",
                                                 "params": {
                                                     "optimizer": "{optimizer}",
-                                                    "mode": "min",
-                                                    "factor": 0.5,
-                                                    "threshold": 1e-08,
-                                                    "threshold_mode": "rel",
-                                                    "patience": 0,
-                                                    "verbose": true
+                                                    "step_size": 10,
+                                                    "gamma": 0.1
                                                 }
                                             }
                                         }
@@ -107,7 +108,7 @@
                                             "class_name": "Adam",
                                             "object_key": "optimizer_d",
                                             "params": {
-                                                "lr": 0.0004,
+                                                "lr": 4e-05,
                                                 "betas": [
                                                     0.5,
                                                     0.999
@@ -128,9 +129,9 @@
                                                     "optimizer": "{optimizer_d}",
                                                     "mode": "min",
                                                     "factor": 0.5,
-                                                    "threshold": 1e-08,
+                                                    "threshold": 0.0001,
                                                     "threshold_mode": "rel",
-                                                    "patience": 0,
+                                                    "patience": 5,
                                                     "verbose": true
                                                 }
                                             }
@@ -188,7 +189,7 @@
                                                 "class_name": "Adam",
                                                 "object_key": "optimizer",
                                                 "params": {
-                                                    "lr": 0.0004,
+                                                    "lr": 4e-05,
                                                     "betas": [
                                                         0.5,
                                                         0.999
@@ -204,15 +205,11 @@
                                                 "monitor": "fid",
                                                 "scheduler": {
                                                     "module": "torch.optim.lr_scheduler",
-                                                    "class_name": "ReduceLROnPlateau",
+                                                    "class_name": "StepLR",
                                                     "params": {
                                                         "optimizer": "{optimizer}",
-                                                        "mode": "min",
-                                                        "factor": 0.5,
-                                                        "threshold": 1e-08,
-                                                        "threshold_mode": "rel",
-                                                        "patience": 0,
-                                                        "verbose": true
+                                                        "step_size": 10,
+                                                        "gamma": 0.1
                                                     }
                                                 }
                                             }
@@ -223,7 +220,7 @@
                                                 "class_name": "Adam",
                                                 "object_key": "optimizer_d",
                                                 "params": {
-                                                    "lr": 0.0004,
+                                                    "lr": 4e-05,
                                                     "betas": [
                                                         0.5,
                                                         0.999
@@ -244,9 +241,9 @@
                                                         "optimizer": "{optimizer_d}",
                                                         "mode": "min",
                                                         "factor": 0.5,
-                                                        "threshold": 1e-08,
+                                                        "threshold": 0.0001,
                                                         "threshold_mode": "rel",
-                                                        "patience": 0,
+                                                        "patience": 5,
                                                         "verbose": true
                                                     }
                                                 }
@@ -274,18 +271,9 @@
                                     "callbacks": [
                                         {
                                             "module": "pytorch_lightning.callbacks",
-                                            "class_name": "EarlyStopping",
-                                            "params": {
-                                                "monitor": "fid",
-                                                "patience": 10,
-                                                "mode": "min"
-                                            }
-                                        },
-                                        {
-                                            "module": "pytorch_lightning.callbacks",
                                             "class_name": "ModelCheckpoint",
                                             "params": {
-                                                "dirpath": "{save_dir}/checkpoints",
+                                                "dirpath": "{save_dir}/checkpoints/",
                                                 "monitor": "fid",
                                                 "save_top_k": 1,
                                                 "verbose": true,
@@ -332,5 +320,40 @@
             }
         ],
         "functions": []
+    },
+    "history_url": [],
+    "dependencies": {
+        "pip": [
+            {
+                "name": "pytorch_lightning",
+                "version": "1.7.5",
+                "lastVersion": "1.7.7"
+            },
+            {
+                "name": "einops",
+                "version": "0.4.1",
+                "lastVersion": "0.5.0"
+            },
+            {
+                "name": "torch",
+                "version": "1.12.1+cu116",
+                "lastVersion": "1.12.1"
+            },
+            {
+                "name": "gan",
+                "version": "0.0.1",
+                "lastVersion": "0.0.1"
+            },
+            {
+                "name": "torchmetrics",
+                "version": "0.9.3",
+                "lastVersion": "0.10.0"
+            },
+            {
+                "name": "torchvision",
+                "version": "0.13.1+cu116",
+                "lastVersion": "0.13.1"
+            }
+        ]
     }
 }

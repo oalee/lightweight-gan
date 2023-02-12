@@ -1,5 +1,4 @@
-import random
-
+from random import random, randint
 import torch
 import torch.nn.functional as F
 import torch.nn as nn
@@ -12,7 +11,7 @@ def random_hflip(tensor, prob):
 
 
 class AugWrapper(nn.Module):
-    def __init__(self, D, image_size):
+    def __init__(self, D):
         super().__init__()
         self.D = D
 
@@ -86,8 +85,8 @@ def rand_offset(x, ratio=1, ratio_h=1, ratio_v=1):
         max_h = int(w * ratio * ratio_h)
         max_v = int(h * ratio * ratio_v)
 
-        value_h = random.randint(0, max_h) * 2 - max_h
-        value_v = random.randint(0, max_v) * 2 - max_v
+        value_h = randint(0, max_h) * 2 - max_h
+        value_v = randint(0, max_v) * 2 - max_v
 
         if abs(value_h) > 0:
             img = torch.roll(img, value_h, 2)
