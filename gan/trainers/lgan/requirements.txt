@@ -1,6 +1,6 @@
 --extra-index-url https://download.pytorch.org/whl/torch_stable.html
+einops~=0.4.1
+torchmetrics~=0.9.3
 pytorch_lightning~=1.7.5
 torchvision~=0.13.1
-torchmetrics~=0.9.3
-einops~=0.4.1
 torch~=1.12.1

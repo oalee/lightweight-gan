@@ -1,3 +1,20 @@
+### Exported modules
+
+You can import the following modules with [Maté](https://github.com/oalee/yerbamate]:
+
+```
+pip install yerbamate
+mate install {url}
+```
+
+|    | type        | name   | url                                                                      | short_url                                   | dependencies                                                                                                                                                                                                                                                        |
+|----|-------------|--------|--------------------------------------------------------------------------|---------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 0  | models      | lgan   | https://github.com/oalee/lightweight-gan/tree/main/gan/models/lgan       | oalee/lightweight-gan/gan/models/lgan       | ['--extra-index-url https://download.pytorch.org/whl/torch_stable.html', 'tqdm~=4.64.1', 'einops~=0.4.1', 'adabelief_pytorch~=0.2.1', 'torchvision~=0.13.1', 'pytorch_fid~=0.2.1', 'torch~=1.12.1', 'aim~=3.14.1']                                                  |
+| 1  | experiments | lwgan  | https://github.com/oalee/lightweight-gan/tree/main/gan/experiments/lwgan | oalee/lightweight-gan/gan/experiments/lwgan | ['--extra-index-url https://download.pytorch.org/whl/torch_stable.html', 'torch~=1.12.1', 'pytorch_lightning~=1.7.5', 'https://github.com/oalee/lightweight-gan/tree/main/gan/models/lgan', 'https://github.com/oalee/lightweight-gan/tree/main/gan/trainers/lgan'] |
+| 2  | trainers    | lgan   | https://github.com/oalee/lightweight-gan/tree/main/gan/trainers/lgan     | oalee/lightweight-gan/gan/trainers/lgan     | ['--extra-index-url https://download.pytorch.org/whl/torch_stable.html', 'einops~=0.4.1', 'torchmetrics~=0.9.3', 'pytorch_lightning~=1.7.5', 'torchvision~=0.13.1', 'torch~=1.12.1']                                                                                |
+| 3  | data        | cars   | https://github.com/oalee/lightweight-gan/tree/main/gan/data/cars         | oalee/lightweight-gan/gan/data/cars         | ['--extra-index-url https://download.pytorch.org/whl/torch_stable.html', 'torchvision~=0.13.1', 'torch~=1.12.1', 'pytorch_lightning~=1.7.5']                                                                                                                        |
+
+
 <img src="./images/sample-512.jpg" width="600px"></img>
 
 *512x512 flowers after 12 hours of training, 1 gpu*
