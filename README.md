@@ -1,6 +1,6 @@
 ### Exported modules
 
-You can import the following modules with [Maté](https://github.com/oalee/yerbamate]:
+You can import the following modules with [Maté](https://github.com/oalee/yerbamate):
 
 ```
 pip install yerbamate
